@@ -1,0 +1,133 @@
+---
+title: "portofolio_"
+author: "Nunu"
+date: "2022-12-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+
+df <- read.csv("D:\\R program\\Data Set\\Kaggle\\vgsales.csv")
+
+head(df)
+summary(df)
+str(df)
+
+sum(is.na(df))
+
+df[df$Year == 2016, ]
+
+```
+
+
+```{r}
+
+df$Genre <- as.factor(df$Genre)
+df$Platform <- as.factor(df$Platform)
+df$Publisher <- as.factor(df$Publisher)
+df$Year <- as.factor(df$Year)
+df$Name <- as.factor(df$Name)
+
+```
+
+```{r}
+
+library("ggplot2")
+library("dplyr")
+
+plot <- ggplot(data = df, aes(y = Genre, fill = Genre)) +
+  geom_bar(color = "black")
+plot
+
+```
+
+
+```{r}
+
+plot2 <- ggplot(data = df, aes(x = Platform, fill = Platform)) +
+  geom_bar(color = "black") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+plot2
+
+```
+
+
+```{r}
+
+plot3 <- ggplot(data = df, aes(x = Year, fill = Year)) +
+  geom_bar(color = "black") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+plot3
+ 
+```
+
+
+```{r}
+
+df_2 <- subset(df, Year %in% c("2007", "2008", "2009", "2010", "2011"))
+
+plot4 <- ggplot(data = df_2, aes(x = Year, fill = Genre)) +
+  geom_bar(position = "dodge", color = "black") 
+plot4
+
+```
+
+
+```{r}
+
+plot5 <- ggplot(data = df, aes(x = Year, y = Global_Sales, fill = Year)) +
+  stat_summary(geom = "bar", fun = "sum", color = "black") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.4))
+plot5
+
+```
+
+
+```{r}
+
+plot6 <- ggplot(data = df, aes(x = Year, y = Global_Sales, fill = Genre)) +
+  stat_summary(geom = "bar", color = "white", fun = "sum", position = "stack") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+        
+plot6
+
+```
+
+
+```{r}
+
+plot7 <- ggplot(data = df, aes(x = Genre, y = Global_Sales, fill = Genre)) +
+  stat_summary(geom = "bar", color = "black", fun = "sum") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+        
+plot7
+
+```
+
+
+```{r}
+
+plot8 <- ggplot(data = df, aes(x = Platform, y = Global_Sales, fill = Platform)) +
+  stat_summary(geom = "bar", color = "black", fun = "sum") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+        
+plot8
+
+```
+
+
+
+
+
+
+
+
+
+
+
